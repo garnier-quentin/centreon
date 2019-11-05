@@ -86,7 +86,7 @@ class CentreonSession
         }
     }
 
-    /**
+    public static function checkSession($sessionId, $pearDB)
      * Check user session status
      *
      * @param $sessionId string Session id to check
