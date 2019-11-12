@@ -457,7 +457,6 @@ class DowntimeController extends AbstractFOSRestController
         }
 
         if (!$contact->isAdmin()) {
-
             $isServiceDowntime = $downtime->getServiceId() !== null;
             $svcCancel = $contact->hasRole(Contact::ROLE_CANCEL_SERVICE_DOWNTIME);
             $hostCancel = $contact->hasRole(Contact::ROLE_CANCEL_HOST_DOWNTIME);
