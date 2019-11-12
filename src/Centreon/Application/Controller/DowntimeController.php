@@ -122,7 +122,7 @@ class DowntimeController extends AbstractFOSRestController
 
         $this->downtimeService->addHostDowntime($downtime, $host);
 
-        if ($withService) {
+        if ($withService === true) {
             $services = $this->monitoringService->findServicesByHost($hostId);
             foreach ($services as $service) {
                 $service->setHost($host);
@@ -453,7 +453,6 @@ class DowntimeController extends AbstractFOSRestController
         }
 
         if (!$contact->isAdmin()) {
-
             $isServiceDowntime = $downtime->getServiceId() !== null;
             $svcCancel = $contact->hasRole(Contact::ROLE_CANCEL_SERVICE_DOWNTIME);
             $hostCancel = $contact->hasRole(Contact::ROLE_CANCEL_HOST_DOWNTIME);
