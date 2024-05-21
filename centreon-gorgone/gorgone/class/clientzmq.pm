@@ -305,13 +305,13 @@ sub event {
 
     $connectors->{ $options{identity} }->{ping_time} = time();
     while ($sockets->{ $options{identity} }->has_pollin()) {
+        my ($rv, $message) = gorgone::standard::library::zmq_dealer_read_message(socket => $sockets->{ $options{identity} });
+        last if ($rv);
+
         # We have a response. So it's ok :)
         if ($connectors->{ $options{identity} }->{ping_progress} == 1) {
             $connectors->{ $options{identity} }->{ping_progress} = 0;
         }
-
-        my ($rv, $message) = gorgone::standard::library::zmq_dealer_read_message(socket => $sockets->{ $options{identity} });
-        last if ($rv);
 
         # in progress
         if ($connectors->{ $options{identity} }->{handshake} == 0) {
